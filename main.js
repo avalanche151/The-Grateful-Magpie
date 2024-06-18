@@ -1,3 +1,4 @@
+
 let middleStory;
 let commentFont;
 let characterFont;
@@ -15,35 +16,41 @@ let isFinished;
 let sub;
 let font;
 let canNext;
+function preload() {
+    soundFormats('mp3');
+    scene1 = new Scene1();
+    scene2and3 = new Scene2and3();
+    scene4 = new Scene4(this);
+    title = new titleScene(this);
+    story = new Story(this);
+    team2 = new Team2(this);
+    team3 = new Team3(this);
+    commentFont = "Calibri";
+    characterFont = "Calibri Bold";
+    story.preload();
+    scene4.preload();
+    title.preload();
+    team2.preload();
+    team3.preload();
+    //font = loadFont("./data/NanumGothic.ttf");
+}
 function setup() {
     sub = 0;
     Team = 0;
     canNext = true;
     createCanvas(1200, 800);
     scene = 0; //modify this to debug
-    scene1 = new Scene1();
-    scene1.pre();
-    scene2and3 = new Scene2and3();
+    scene1.setup();
     scene2and3.setup();
-    scene4 = new Scene4(this);
     scene4.setup();
-    scene5 = new Scene5();
-    scene5.setup();
-    title = new titleScene(this);
+    //scene5 = new Scene5();
+    //scene5.setup();
     title.setup();
-    story = new Story(this);
     story.setup();
-    team2 = new Team2(this);
     team2.setup();
-    team3 = new Team3(this);
     team3.setup();
 }
-function preload() {
-    
-    commentFont = "Calibri";
-    characterFont = "Calibri Bold";
-    //font = loadFont("data/H2sa1M-48.vlw");
-}
+
 function draw() {
     if (Team == 0) {
         if (scene == 0) {
@@ -97,6 +104,7 @@ function mousePressed() {
     if (Team == 1) {
         team2.mousePressed();
     }
+    return false;
 }
 function mouseDragged() {
     if (Team == 2) {
@@ -136,7 +144,7 @@ function mouseClicked() {
         scene4.mouseClicked();
     }
 }
-function subtitle(text, name, col) {
+function subtitle(subtitle, name, col) {
     push();
     fill(0, 128);
     stroke(0);
@@ -145,9 +153,9 @@ function subtitle(text, name, col) {
     pop();
     push();
     fill(col);
-    textAlign(LEFT_ARROW, CENTER);
-    textFont(commentFont);
-    text(text, 80, 670);
+    textAlign(LEFT, CENTER);
+    textFont(commentFont,40);
+    text(subtitle, 80, 670);
     pop(); //인물이름
     push();
     fill(0, 128);
@@ -158,7 +166,7 @@ function subtitle(text, name, col) {
     push();
     fill(col);
     textAlign(CENTER, CENTER);
-    textFont(characterFont);
+    textFont(characterFont,30);
     text(name, 115, 595);
     pop(); // println(PFont.list());
 }

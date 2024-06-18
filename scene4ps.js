@@ -34,12 +34,11 @@ class Scene4 {
     arr;
     bgm;
     constructor(p) {
-        winarr = loadSound("winarr.mp3");
-        this.arr = loadSound("arrowsound.mp3");
-        this.bgm = loadSound("arrowbgm.mp3");
+       
     }
-    sx = new Array(30);
-    sy = new Array(30);
+    sx = [0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0];
+    sy = [0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0];
+
     segLength = 20;
     snakeX;
     snakeY;
@@ -47,23 +46,28 @@ class Scene4 {
     moveSpeed = 2;
     angle;
     snake = new Array(3);
+    preload(){
+        winarr = loadSound("./data/winarr");
+        this.arr = loadSound("./data/arrowsound");
+        this.bgm = loadSound("./data/arrowbgm");
+    }
     setup() {
         this.alpha = 125;
         this.a = 1;
         this.ringY = 0;
         this.dr = 0.8;
-        this.bg = loadImage("숲배경.png");
-        this.snakeupward = loadImage("smallsnake.png");
-        this.treebackground = loadImage("treebackground.png");
-        this.winbackground = loadImage("winbackground.png");
-        this.retrybackground = loadImage("retrybackground.png");
-        this.howtoplay = loadImage("howtoplayarr.png");
-        this.ring = loadImage("ring.png");
+        this.bg = loadImage("./data/숲배경.png");
+        this.snakeupward = loadImage("./data/smallsnake.png");
+        this.treebackground = loadImage("./data/treebackground.png");
+        this.winbackground = loadImage("./data/winbackground.png");
+        this.retrybackground = loadImage("./data/retrybackground.png");
+        this.howtoplay = loadImage("./data/howtoplayarr.png");
+        this.ring = loadImage("./data/ring.png");
         this.hitcount = 0;
         this.gameFinished = -1;
-        this.snake[0] = loadImage("snake_head.png");
-        this.snake[1] = loadImage("snake_body.png");
-        this.snake[2] = loadImage("snake_tail.png");
+        this.snake[0] = loadImage("./data/snake_head.png");
+        this.snake[1] = loadImage("./data/snake_body.png");
+        this.snake[2] = loadImage("./data/snake_tail.png");
         this.snakeX = width / 2 - 500;
         this.snakeY = height + 500;
     }
@@ -74,13 +78,12 @@ class Scene4 {
             this.svol = constrain(this.svol, 0, 0.7);
             this.bgm.amp(this.svol);
             if (this.temp2) {
-                this.bgm.cue(0);
                 this.bgm.loop();
                 this.temp2 = false;
             }
             image(this.bg, 0, 0);
             image(this.treebackground, 0, 0);
-            this.snake();
+            this.Snake();
             this.target();
             this.arrow();
             this.gauge();
@@ -122,12 +125,11 @@ class Scene4 {
     }
     win() {
         if (sstart) {
-            winarr.cue(0);
             winarr.play();
             sstart = false;
         }
         push();
-        textMode(CENTER);
+        textAlign(CENTER);
         textSize(100);
         image(this.winbackground, 0, 0);
         push();
@@ -152,7 +154,7 @@ class Scene4 {
     }
     fail() {
         push();
-        textMode(CENTER);
+        fill(255,0,0);
         textAlign(CENTER, CENTER);
         textSize(100);
         image(this.retrybackground, 0, 0);
@@ -185,7 +187,7 @@ class Scene4 {
         push();
         rectMode(CENTER);
         fill(255, 0, 0);
-        if (this.canfire && this.mousePressed && this.gameFinished == 0) {
+        if (this.canfire && mouseIsPressed && this.gameFinished == 0) {
             rect(width / 2, height - 40, (this.power % 100) * 5, 20);
             this.power += 1;
             this.ishit = false;
@@ -195,7 +197,6 @@ class Scene4 {
     mouseReleased() {
         if (this.canfire) {
             if (this.temp1) {
-                this.arr.cue(0);
                 this.arr.play();
                 this.temp1 = false;
             }
@@ -240,7 +241,7 @@ class Scene4 {
             }
         }
     }
-    snake() {
+    Snake() {
         this.snakeX = lerp(this.snakeX, this.moveparallel, 0.01);
         if (this.snakeY > height) {
             this.snakeY -= 2;
@@ -250,7 +251,7 @@ class Scene4 {
         if (frameCount % 60 == 0) {
             this.moveparallel = random(100, width - 100);
         }
-        for (let i = 0; i < this.sx.length - 1; i++) {
+        for (let i = 0; i < this.sx.length-1; i++) {
             if (i == this.sx.length - 2) {
                 this.dragSegment(
                     i + 1,
@@ -301,10 +302,10 @@ class Scene4 {
     dragSegment(i, xin, yin, go, Xscale, Yscale) {
         let dx = xin - this.sx[i];
         let dy = yin - this.sy[i];
-        let angle = atan2(this.dy, dx);
-        this.sx[i] = xin - cos(this.angle) * this.segLength;
-        this.sy[i] = yin - sin(this.angle) * this.segLength;
-        this.segment(this.sx[i], this.sy[i], this.angle, go, Xscale, Yscale);
+        let angle = atan2(dy, dx);
+        this.sx[i] = xin - cos(angle) * this.segLength;
+        this.sy[i] = yin - sin(angle) * this.segLength;
+        this.segment(this.sx[i], this.sy[i],angle, go, Xscale, Yscale);
     }
     segment(x, y, a, go, Xscale, Yscale) {
         push();
@@ -321,6 +322,7 @@ class Scene4 {
         image(this.howtoplay, 0, 0);
         textAlign(CENTER, CENTER);
         textSize(50);
+        fill(255);
         text("Move mouse to aim", width / 2 + 300, 300);
         text("Click & Hold to draw", width / 2 + 300, 400);
         text("Release to shoot", width / 2 + 300, 500);

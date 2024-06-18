@@ -13,21 +13,21 @@
         s37;
         s38;
         s39;
-        constructor(p) {
-            this.retry_seonbi = loadImage("선비재수준비.png");
-            this.study1 = loadImage("공부1.png");
-            this.study2 = loadImage("공부2.png");
-            this.study3 = loadImage("공부3.png");
-            this.study4 = loadImage("공부4.jpg");
-            this.study5 = loadImage("공부5.jpg");
-            this.study6 = loadImage("공부5.jpg");
-            this.s36 = loadSound("s36.mp3");
-            this.s37 = loadSound("s37.mp3");
-            this.s38 = loadSound("s38.mp3");
-            this.s39 = loadSound("s39.mp3");
-            kkachisound = loadSound("kkachisound.mp3");
+        preload() {
+            this.s36 = loadSound("./data/s36");
+            this.s37 = loadSound("./data/s37");
+            this.s38 = loadSound("./data/s38");
+            this.s39 = loadSound("./data/s39");
+            kkachisound = loadSound("./data/kkachisound");    
         }
         setup() {
+            this.retry_seonbi = loadImage("./data/선비재수준비.png");
+            this.study1 = loadImage("./data/공부1.png");
+            this.study2 = loadImage("./data/공부2.png");
+            this.study3 = loadImage("./data/공부3.png");
+            this.study4 = loadImage("./data/공부4.jpg");
+            this.study5 = loadImage("./data/공부5.jpg");
+            this.study6 = loadImage("./data/공부5.jpg");
             this.scn_idx = 0;
         }
         update() {
@@ -39,7 +39,6 @@
                     push();
                     if (sstart) {
                         //audio set
-                        this.s36.cue(0);
                         this.s36.play();
                         sstart = false;
                     }
@@ -60,7 +59,6 @@
                     if (sstart) {
                         //audio set
                         this.s36.stop();
-                        this.s37.cue(0);
                         this.s37.play();
                         sstart = false;
                     }
@@ -99,7 +97,6 @@
                 case 4:
                     if (sstart) {
                         //audio set
-                        kkachisound.cue(0);
                         kkachisound.loop();
                         sstart = false;
                     }
@@ -116,7 +113,6 @@
                     push();
                     if (sstart) {
                         //audio set
-                        this.s38.cue(0);
                         this.s38.play();
                         sstart = false;
                     }
@@ -132,7 +128,6 @@
                     if (sstart) {
                         //audio set
                         this.s38.stop();
-                        this.s39.cue(0);
                         this.s39.play();
                         sstart = false;
                     }

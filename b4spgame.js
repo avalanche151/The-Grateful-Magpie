@@ -32,38 +32,38 @@
         s318;
         s319;
         s320;
-        constructor(p) {
-            this.mx = 0;
-            this.my = 0;
-            this.outside = loadImage("outsidebackground.png");
-            this.kkachi_with_jokbo = loadImage("kkachi_with_jokbo.png");
-            this.kkachi_and_seonbi = loadImage("kkachi_and_seonbi.png");
-            this.momkkachi_said = loadImage("momkkachi_said.png");
-            this.momkkachi_said2 = loadImage("momkkachi_said2.png");
-            this.momkkachi_said3 = loadImage("momkkachi_said3.png");
-            this.momkkachi_said4 = loadImage("momkkachi_said4.png");
-            this.momkkachi_said5 = loadImage("momkkachi_said5.png");
-            this.momkkachi_said6 = loadImage("momkkachi_said6.png");
-            this.sneak = loadImage("sneak.png");
-            this.find = loadImage("findsjokbo.png");
-            this.thief = loadImage("thief.png");
-            this.thiefmagpie = loadImage("thiefmagpie.png");
-            this.nollam = loadImage("gaenollam.png");
-            this.excl = loadImage("excl.png");
-            this.nbg = loadImage("nollambg.png");
-            this.s310 = loadSound("s310.mp3");
-            this.s311 = loadSound("s311.mp3");
-            this.s312 = loadSound("s312.mp3");
-            this.s313 = loadSound("s313.mp3");
-            this.s314 = loadSound("s314.mp3");
-            this.s315 = loadSound("s315.mp3");
-            this.s316 = loadSound("s316.mp3");
-            this.s317 = loadSound("s317.mp3");
-            this.s318 = loadSound("s318.mp3");
-            this.s319 = loadSound("s319.mp3");
-            this.s320 = loadSound("s320.mp3");
+        preload(){
+            this.s310 = loadSound("./data/s310");
+            this.s311 = loadSound("./data/s311");
+            this.s312 = loadSound("./data/s312");
+            this.s313 = loadSound("./data/s313");
+            this.s314 = loadSound("./data/s314");
+            this.s315 = loadSound("./data/s315");
+            this.s316 = loadSound("./data/s316");
+            this.s317 = loadSound("./data/s317");
+            this.s318 = loadSound("./data/s318");
+            this.s319 = loadSound("./data/s319");
+            this.s320 = loadSound("./data/s320");
         }
         setup() {
+            this.mx = 0;
+            this.my = 0;
+            this.outside = loadImage("./data/outsidebackground.png");
+            this.kkachi_with_jokbo = loadImage("./data/kkachi_with_jokbo.png");
+            this.kkachi_and_seonbi = loadImage("./data/kkachi_and_seonbi.png");
+            this.momkkachi_said = loadImage("./data/momkkachi_said.png");
+            this.momkkachi_said2 = loadImage("./data/momkkachi_said2.png");
+            this.momkkachi_said3 = loadImage("./data/momkkachi_said3.png");
+            this.momkkachi_said4 = loadImage("./data/momkkachi_said4.png");
+            this.momkkachi_said5 = loadImage("./data/momkkachi_said5.png");
+            this.momkkachi_said6 = loadImage("./data/momkkachi_said6.png");
+            this.sneak = loadImage("./data/sneak.png");
+            this.find = loadImage("./data/findsjokbo.png");
+            this.thief = loadImage("./data/thief.png");
+            this.thiefmagpie = loadImage("./data/thiefmagpie.png");
+            this.nollam = loadImage("./data/gaenollam.png");
+            this.excl = loadImage("./data/excl.png");
+            this.nbg = loadImage("./data/nollambg.png");
             this.scn_idx = 0;
             this.mx = 0;
             this.my = 0;
@@ -77,7 +77,6 @@
                     push();
                     if (sstart) {
                         //audio set
-                        this.s310.cue(0);
                         this.s310.play();
                         sstart = false;
                     }
@@ -94,7 +93,6 @@
                     if (sstart) {
                         //audio set
                         this.s310.stop();
-                        this.s311.cue(0);
                         this.s311.play();
                         sstart = false;
                     }
@@ -113,7 +111,6 @@
                     if (sstart) {
                         //audio set
                         this.s311.stop();
-                        this.s312.cue(0);
                         this.s312.play();
                         sstart = false;
                     }
@@ -145,7 +142,6 @@
                     if (sstart) {
                         //audio set
                         this.s312.stop();
-                        this.s313.cue(0);
                         this.s313.play();
                         sstart = false;
                     }
@@ -169,7 +165,6 @@
                     if (sstart) {
                         //audio set
                         this.s313.stop();
-                        this.s314.cue(0);
                         this.s314.play();
                         sstart = false;
                     }
@@ -193,7 +188,6 @@
                     if (sstart) {
                         //audio set
                         this.s314.stop();
-                        this.s315.cue(0);
                         this.s315.play();
                         sstart = false;
                     }
@@ -213,7 +207,6 @@
                     if (sstart) {
                         //audio set
                         this.s315.stop();
-                        this.s316.cue(0);
                         this.s316.play();
                         sstart = false;
                     }
@@ -233,7 +226,6 @@
                     if (sstart) {
                         //audio set
                         this.s316.stop();
-                        this.s317.cue(0);
                         this.s317.play();
                         sstart = false;
                     }
@@ -249,7 +241,6 @@
                     if (sstart) {
                         //audio set
                         this.s317.stop();
-                        this.s318.cue(0);
                         this.s318.play();
                         sstart = false;
                     }
@@ -274,7 +265,6 @@
                     if (sstart) {
                         //audio set
                         this.s318.stop();
-                        this.s319.cue(0);
                         this.s319.play();
                         sstart = false;
                     }
@@ -299,7 +289,6 @@
                     if (sstart) {
                         //audio set
                         this.s319.stop();
-                        this.s320.cue(0);
                         this.s320.play();
                         sstart = false;
                     }

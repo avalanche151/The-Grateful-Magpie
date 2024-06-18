@@ -16,28 +16,28 @@
         s324;
         s325;
         s326;
-        constructor(p) {
-            this.complete = loadImage("complete.png");
-            this.kkachi_thats_what_happened = loadImage(
-                "kkachi_thats_what_happened.png"
-            );
-            this.kkachi_with_jokbo_and_seonbi = loadImage(
-                "kkachi_with_jokbo_and_seonbi.jpg"
-            );
-            this.look_jokbo = loadImage("look_jokbo.png");
-            this.fire_seonbi = loadImage("fire_seonbi.png");
-            this.fire_seonbi2 = loadImage("fire_seonbi2.png");
-            this.soop = loadImage("outsidebackground.png");
-            this.studying_hard_seonbi = loadImage("studying_hard_seonbi.png");
-            this.test_seonbi = loadImage("과거시험보는선비.jpg");
-            this.s321 = loadSound("s321.mp3");
-            this.s322 = loadSound("s322.mp3");
-            this.s323 = loadSound("s323.mp3");
-            this.s324 = loadSound("s324.mp3");
-            this.s325 = loadSound("s325.mp3");
-            this.s326 = loadSound("s326.mp3");
+        preload(){
+            this.s321 = loadSound("./data/s321");
+            this.s322 = loadSound("./data/s322");
+            this.s323 = loadSound("./data/s323");
+            this.s324 = loadSound("./data/s324");
+            this.s325 = loadSound("./data/s325");
+            this.s326 = loadSound("./data/s326");
         }
         setup() {
+            this.complete = loadImage("./data/complete.png");
+            this.kkachi_thats_what_happened = loadImage(
+                "./data/kkachi_thats_what_happened.png"
+            );
+            this.kkachi_with_jokbo_and_seonbi = loadImage(
+                "./data/kkachi_with_jokbo_and_seonbi.jpg"
+            );
+            this.look_jokbo = loadImage("./data/look_jokbo.png");
+            this.fire_seonbi = loadImage("./data/fire_seonbi.png");
+            this.fire_seonbi2 = loadImage("./data/fire_seonbi2.png");
+            this.soop = loadImage("./data/outsidebackground.png");
+            this.studying_hard_seonbi = loadImage("./data/studying_hard_seonbi.png");
+            this.test_seonbi = loadImage("./data/과거시험보는선비.jpg");
             this.scn_idx = 0;
         }
         update() {
@@ -48,7 +48,6 @@
                 case -1:
                     if (sstart) {
                         //audio set
-                        this.s321.cue(0);
                         this.s321.play();
                         sstart = false;
                     }
@@ -74,7 +73,6 @@
                     if (sstart) {
                         //audio set
                         this.s321.stop();
-                        this.s322.cue(0);
                         this.s322.play();
                         sstart = false;
                     }
@@ -90,7 +88,6 @@
                     if (sstart) {
                         //audio set
                         this.s322.stop();
-                        this.s323.cue(0);
                         this.s323.play();
                         sstart = false;
                     }
@@ -112,7 +109,6 @@
                     if (sstart) {
                         //audio set
                         this.s323.stop();
-                        this.s324.cue(0);
                         this.s324.play();
                         sstart = false;
                     }
@@ -134,7 +130,6 @@
                     if (sstart) {
                         //audio set
                         this.s324.stop();
-                        this.s325.cue(0);
                         this.s325.play();
                         sstart = false;
                     }
@@ -158,7 +153,6 @@
                     if (sstart) {
                         //audio set
                         this.s325.stop();
-                        this.s326.cue(0);
                         this.s326.play();
                         sstart = false;
                     }

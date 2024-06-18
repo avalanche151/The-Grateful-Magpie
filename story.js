@@ -1,15 +1,12 @@
 // [processing-p5-convert] import processing.sound.*;
-let sstart, splay;
+
+ let sstart, splay;
 class Story {
     s = new Array(27);
     kkachisound;
     ssnake;
     constructor(p) {
-        for (let i = 1; i < this.s.length; i++) {
-            this.s[i] = loadSound("s1" + i + ".mp3");
-        }
-        this.kkachisound = loadSound("kkachisound.mp3");
-        this.ssnake = loadSound("snake.mp3");
+        
     }
     sscene;
     cob;
@@ -38,6 +35,13 @@ class Story {
     scy;
     c;
     e = 0;
+    preload(){
+        for (let i = 1; i < this.s.length; i++) {
+            this.s[i] = loadSound("./data/s1" + i);
+        }
+        this.kkachisound = loadSound("./data/kkachisound");
+        this.ssnake = loadSound("./data/snake");
+    }
     setup() {
         sstart = true;
         splay = false;
@@ -47,26 +51,26 @@ class Story {
         this.sy = 0;
         this.c = 4;
         this.ssy = -3;
-        this.arrow = loadImage("arrow.png");
-        this.back = loadImage("숲배경.png");
-        this.righthand = loadImage("righthand.png");
-        this.exscene1 = loadImage("middleStory10-1.png");
-        this.exscene2 = loadImage("middleStory10-2.png");
-        this.ms11 = loadImage("middleStory1-1.png");
-        this.ms12 = loadImage("middleStory1-2.png");
-        this.ms22 = loadImage("middleStory2-2.png");
-        this.ms3seonbi = loadImage("ms3seonbi.png");
-        this.ms110 = loadImage("middleStory11-0.png");
-        this.ms111 = loadImage("middleStory11-1.png");
-        this.ms112 = loadImage("middleStory11-2.png");
-        this.ms113 = loadImage("middleStory11-3.png");
+        this.arrow = loadImage("./data/arrow.png");
+        this.back = loadImage("./data/숲배경.png");
+        this.righthand = loadImage("./data/righthand.png");
+        this.exscene1 = loadImage("./data/middleStory10-1.png");
+        this.exscene2 = loadImage("./data/middleStory10-2.png");
+        this.ms11 = loadImage("./data/middleStory1-1.png");
+        this.ms12 = loadImage("./data/middleStory1-2.png");
+        this.ms22 = loadImage("./data/middleStory2-2.png");
+        this.ms3seonbi = loadImage("./data/ms3seonbi.png");
+        this.ms110 = loadImage("./data/middleStory11-0.png");
+        this.ms111 = loadImage("./data/middleStory11-1.png");
+        this.ms112 = loadImage("./data/middleStory11-2.png");
+        this.ms113 = loadImage("./data/middleStory11-3.png");
         this.sscene = new Array(14);
         for (let i = 1; i < 14; i++) {
-            this.sscene[i] = loadImage("middleStory" + i + ".png");
+            this.sscene[i] = loadImage("./data/middleStory" + i + ".png");
         }
         this.cob = new Array(5);
         for (let i = 1; i < 5; i++) {
-            this.cob[i] = loadImage("cob" + i + ".png");
+            this.cob[i] = loadImage("./data/cob" + i + ".png");
         }
     }
     story1() {
@@ -89,7 +93,6 @@ class Story {
             subtitle("Once upon a time...", "Narrator", "#ffffff");
             if (sstart) {
                 //audio set
-                this.s[1].cue(0);
                 this.s[1].play();
                 sstart = false;
             } //text("Once upon a time...", 60, 700);
@@ -97,7 +100,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[1].stop();
-                this.s[2].cue(0);
                 this.s[2].play();
                 sstart = false;
             }
@@ -125,7 +127,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[2].stop();
-                this.s[3].cue(0);
                 this.s[3].play();
                 sstart = false;
             }
@@ -134,7 +135,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[3].stop();
-                this.s[4].cue(0);
                 this.s[4].play();
                 sstart = false;
             }
@@ -147,7 +147,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[4].stop();
-                this.s[5].cue(0);
                 this.s[5].play();
                 sstart = false;
             }
@@ -159,10 +158,11 @@ class Story {
             canNext = false;
             push();
             fill(200, 0, 0);
+            textSize(40);
             text("click here!", width - 200, height - 15);
             pop();
             if (
-                mousePressed &&
+                mouseIsPressed &&
                 mouseX > width - 200 &&
                 mouseX < width &&
                 mouseY > height - 100 &&
@@ -194,7 +194,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[5].stop();
-                this.s[6].cue(0);
                 this.s[6].play();
                 sstart = false;
             }
@@ -207,7 +206,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[6].stop();
-                this.s[7].cue(0);
                 this.s[7].play();
                 sstart = false;
             }
@@ -233,7 +231,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[7].stop();
-                this.s[8].cue(0);
                 this.s[8].play();
                 sstart = false;
             }
@@ -257,7 +254,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[8].stop();
-                this.s[9].cue(0);
                 this.s[9].play();
                 sstart = false;
             }
@@ -271,7 +267,6 @@ class Story {
                 //audio set
                 this.s[9].stop();
                 this.ssnake.loop();
-                this.s[10].cue(0);
                 this.s[10].play();
                 sstart = false;
             }
@@ -291,7 +286,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[10].stop();
-                this.s[11].cue(0);
                 this.s[11].play();
                 sstart = false;
             }
@@ -300,7 +294,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[11].stop();
-                this.s[12].cue(0);
                 this.s[12].play();
                 sstart = false;
             }
@@ -324,7 +317,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[12].stop();
-                this.s[13].cue(0);
                 this.s[13].play();
                 sstart = false;
             }
@@ -337,7 +329,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[13].stop();
-                this.s[14].cue(0);
                 this.s[14].play();
                 sstart = false;
             }
@@ -364,7 +355,6 @@ class Story {
                 this.kkachisound.stop();
                 this.ssnake.stop();
                 this.s[14].stop();
-                this.s[15].cue(0);
                 this.s[15].play();
                 sstart = false;
             }
@@ -377,7 +367,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[15].stop();
-                this.s[16].cue(0);
                 this.s[16].play();
                 sstart = false;
             }
@@ -402,7 +391,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[16].stop();
-                this.s[17].cue(0);
                 this.s[17].play();
                 sstart = false;
             }
@@ -411,7 +399,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[17].stop();
-                this.s[18].cue(0);
                 this.s[18].play();
                 sstart = false;
             }
@@ -443,7 +430,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[18].stop();
-                this.s[19].cue(0);
                 this.s[19].play();
                 sstart = false;
             }
@@ -456,7 +442,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[19].stop();
-                this.s[20].cue(0);
                 this.s[20].play();
                 sstart = false;
             }
@@ -494,7 +479,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[20].stop();
-                this.s[21].cue(0);
                 this.s[21].play();
                 sstart = false;
             } //textFont(font, 50);
@@ -512,7 +496,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[21].stop();
-                this.s[22].cue(0);
                 this.s[22].play();
                 sstart = false;
             }
@@ -543,7 +526,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[22].stop();
-                this.s[23].cue(0);
                 this.s[23].play();
                 sstart = false;
             }
@@ -556,7 +538,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[23].stop();
-                this.s[24].cue(0);
                 this.s[24].play();
                 sstart = false;
             }
@@ -571,7 +552,7 @@ class Story {
     }
     story13() {
         push();
-        imageMode(0);
+        imageMode(CORNER);
         image(this.sscene[13], 0, 0);
         push();
         imageMode(CENTER);
@@ -584,7 +565,6 @@ class Story {
             if (sstart) {
                 //audio set
                 this.s[24].stop();
-                this.s[25].cue(0);
                 this.s[25].play();
                 sstart = false;
             }
@@ -592,12 +572,11 @@ class Story {
         } else if (sub == 1) {
             if (sstart) {
                 this.s[25].stop();
-                this.s[26].cue(0);
                 this.s[26].play();
                 sstart = false;
             }
             push();
-            imageMode(0);
+            imageMode(CORNER);
             image(this.sscene[13], 0, 0);
             pop();
             canNext = false;
@@ -622,7 +601,7 @@ class Story {
                 rectMode(CENTER);
                 rect(width / 2 - 300, height / 2, 210, 210);
                 pop();
-                if (mousePressed) {
+                if (mouseIsPressed) {
                     Team = 1;
                     team2.setup();
                     this.s[26].stop();
@@ -643,7 +622,7 @@ class Story {
                 rectMode(CENTER);
                 rect(width / 2 + 300, height / 2, 210, 210);
                 pop();
-                if (mousePressed) {
+                if (mouseIsPressed) {
                     Team = 2;
                     team3.setup();
                     this.s[26].stop();

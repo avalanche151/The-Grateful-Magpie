@@ -33,9 +33,9 @@ class titleScene {
     showmaster;
     introsound;
     birdsound;
-    constructor(p) {
-        this.introsound = loadSound("introsound.mp3");
-        this.birdsound = loadSound("birdsound.mp3");
+    preload(){
+        this.introsound = loadSound("./data/introsound");
+        this.birdsound = loadSound("./data/birdsound"); 
     }
     setup() {
         this.showmaster = false;
@@ -44,10 +44,10 @@ class titleScene {
         this.tehm = 255;
         this.scale = 30;
         this.alpha = 0;
-        this.birdImg = loadImage("bird.png");
-        this.birdImg2 = loadImage("RIGHTkkachi.png");
-        this.titlebg = loadImage("titlebg.png");
-        this.titles = loadImage("title.png");
+        this.birdImg = loadImage("./data/bird.png");
+        this.birdImg2 = loadImage("./data/RIGHTkkachi.png");
+        this.titlebg = loadImage("./data/titlebg.png");
+        this.titles = loadImage("./data/title.png");
     }
     draw() {
         if (sub == 1) {
@@ -70,9 +70,7 @@ class titleScene {
         } else if (sub == 0) {
             this.off = true;
             if (this.temp1) {
-                this.introsound.cue(0);
                 this.introsound.loop();
-                this.birdsound.cue(0);
                 this.birdsound.loop();
                 this.temp1 = false;
             }

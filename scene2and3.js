@@ -33,15 +33,15 @@ class Scene2and3 {
     setup() {
         this.a = 50;
         this.ad = 1;
-        this.magpie1 = loadImage("magpie1.png");
-        this.magpie2 = loadImage("magpie2.png");
-        this.magpie3 = loadImage("magpie3.png");
-        this.bgImg = loadImage("background2.png");
-        this.birdImg = loadImage("bird.png");
-        this.tree1 = loadImage("tree1.png");
-        this.tree2 = loadImage("tree2.png");
-        this.nestImg = loadImage("nest.png");
-        this.snakeImg = loadImage("shead.png");
+        this.magpie1 = loadImage("./data/magpie1.png");
+        this.magpie2 = loadImage("./data/magpie2.png");
+        this.magpie3 = loadImage("./data/magpie3.png");
+        this.bgImg = loadImage("./data/background2.png");
+        this.birdImg = loadImage("./data/bird.png");
+        this.tree1 = loadImage("./data/tree1.png");
+        this.tree2 = loadImage("./data/tree2.png");
+        this.nestImg = loadImage("./data/nest.png");
+        this.snakeImg = loadImage("./data/shead.png");
         this.imgX = 400;
         this.imgY = 300;
         this.imgWidth = 750;

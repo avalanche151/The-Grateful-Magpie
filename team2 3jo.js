@@ -16,24 +16,35 @@ class Team3 {
     ending;
     howsp;
     howmoun;
-    constructor(p) {
-        this.spgame = new Spgame(p);
-        this.b4door = new B4Door(p);
-        this.door = new Door(p);
-        this.easyquestion = new EasyQuestion(p);
-        this.answer = new Answer(p);
-        this.jumpgamemountain = new JumpGameMountain(p);
-        this.b4jumpgamemountain = new B4JumpGameMountain(p);
-        this.b4answer = new B4Answer(p);
-        this.b4spgame = new B4Spgame(p);
-        this.b4easy = new B4Easy(p);
+    preload() {
+        this.spgame = new Spgame();
+        this.b4door = new B4Door();
+        this.door = new Door();
+        this.easyquestion = new EasyQuestion();
+        this.answer = new Answer();
+        this.jumpgamemountain = new JumpGameMountain();
+        this.b4jumpgamemountain = new B4JumpGameMountain();
+        this.b4answer = new B4Answer();
+        this.b4spgame = new B4Spgame();
+        this.b4easy = new B4Easy();
         this.ending = new Ending();
-        this.aeasy = new Afeasy(p);
+        this.aeasy = new Afeasy();
         this.howsp = new Howsp();
         this.howmoun = new Howmoun();
+        this.b4jumpgamemountain.preload();
+        this.spgame.preload();
+        this.aeasy.preload();
+        this.b4door.preload();
+        this.door.preload();
+        this.easyquestion.preload();
+        this.answer.preload();
+        this.jumpgamemountain.preload();
+        this.b4answer.preload();
+        this.b4spgame.preload();
+        this.b4easy.preload();
     }
     setup() {
-        this.font = loadFont("H2sa1M-100.vlw");
+        this.font = loadFont("./data/NanumGothic.ttf");
         createCanvas(1200, 800);
         this.b4door.setup();
         this.door.setup();
@@ -46,7 +57,9 @@ class Team3 {
         this.b4easy.setup();
         this.b4answer.setup();
         this.aeasy.setup();
+        this.spgame.setup();
         this.spgame.clearGame();
+        this.ending.setup();
         main_scene_code = "b4jumpgamemountain";
     }
     draw() {

@@ -4,26 +4,44 @@ class Ending {
     font;
     MyFont;
     fir = new Firework();
-    chr1 = new Charac("chr1.png", 80, 120);
-    chr2 = new Charac("chr2.png", 150, 150);
-    chr3 = new Charac("chr3.png", 100, 100);
-    chr4 = new Charac("chr4.png", 120, 125);
-    chr5 = new Charac("chr5.png", 300, 300);
-    chr6 = new Charac("chr6.png", 100, 100);
-    chr7 = new Charac("chr7.png", 100, 100);
-    chr8 = new Charac("chr8.png", 125, 100);
-    chr9 = new Charac("chr9.png", 100, 100);
-    chr10 = new Charac("chr10.png", 240, 160);
-    chr11 = new Charac("chr11.png", 65, 110);
-    chr12 = new Charac("chr12.png", 80, 100);
-    chr13 = new Charac("chr13.png", 200, 200);
-    chr14 = new Charac("chr14.png", 120, 120);
-    chr15 = new Charac("chr15.png", 94, 107);
+    chr1 = new Charac("./data/chr1.png", 80, 120);
+    chr2 = new Charac("./data/chr2.png", 150, 150);
+    chr3 = new Charac("./data/chr3.png", 100, 100);
+    chr4 = new Charac("./data/chr4.png", 120, 125);
+    chr5 = new Charac("./data/chr5.png", 300, 300);
+    chr6 = new Charac("./data/chr6.png", 100, 100);
+    chr7 = new Charac("./data/chr7.png", 100, 100);
+    chr8 = new Charac("./data/chr8.png", 125, 100);
+    chr9 = new Charac("./data/chr9.png", 100, 100);
+    chr10 = new Charac("./data/chr10.png", 240, 160);
+    chr11 = new Charac("./data/chr11.png", 65, 110);
+    chr12 = new Charac("./data/chr12.png", 80, 100);
+    chr13 = new Charac("./data/chr13.png", 200, 200);
+    chr14 = new Charac("./data/chr14.png", 120, 120);
+    chr15 = new Charac("./data/chr15.png", 94, 107);
     constructor() {
+        
+    }
+    setup(){
         this.sceneNumber = 1;
-        this.font = loadFont("H2sa1M-100.vlw");
-        this.MyFont = loadFont("NanumGothic", 10);
+        this.font = loadFont("./data/NanumGothic.ttf");
+        this.MyFont = loadFont("./data/NanumGothic.ttf");
         this.ty = height / 2;
+        this.chr1.setup();
+        this.chr2.setup();
+        this.chr3.setup();
+        this.chr4.setup();
+        this.chr5.setup();
+        this.chr6.setup();
+        this.chr7.setup();
+        this.chr8.setup();
+        this.chr9.setup();
+        this.chr10.setup();
+        this.chr11.setup();
+        this.chr12.setup();
+        this.chr13.setup();
+        this.chr14.setup();
+        this.chr15.setup();
     }
     update() {
         this.drawing();
@@ -66,7 +84,7 @@ class Ending {
                 text("Return to Choice", 845, 700);
                 console.log(mouseY);
             }
-            if (this.mousePressed) {
+            if (mouseIsPressed) {
                 if (
                     mouseX > 845 &&
                     mouseX < 1160 &&
@@ -94,7 +112,7 @@ class Ending {
                 text("Return to title", 900, 760);
                 console.log(mouseY);
             }
-            if (this.mousePressed) {
+            if (mouseIsPressed) {
                 if (
                     mouseX > 900 &&
                     mouseX < 1170 &&
@@ -303,7 +321,7 @@ class Ending {
             height / 2
         );
         text(
-            "박서연 : 총괄 팀장, 디자인팀(장면 채색 및 명암, 선비 retest 다짐 장면 제작, 일부 숲 배경 제작), 과거시험 문제 코드 구현(answer), 어려운 문제 시험지 제작, 3조 자막 제작 및 수정, 3조 전체 피드백 및 일부 추가 장면 기획(spgame 이전 장면들), 엔딩 크레딧 코드 수정, fireworks 효과 코드 구현, 사운드 추가(intro 및 outro, eating, success, failed sound 등), 까치 날갯짓 사운드 녹음(flying.mp3), 팀 전체 장면 피드백 및 인터랙션 기획",
+            "박서연 : 총괄 팀장, 디자인팀(장면 채색 및 명암, 선비 retest 다짐 장면 제작, 일부 숲 배경 제작), 과거시험 문제 코드 구현(answer), 어려운 문제 시험지 제작, 3조 자막 제작 및 수정, 3조 전체 피드백 및 일부 추가 장면 기획(spgame 이전 장면들), 엔딩 크레딧 코드 수정, fireworks 효과 코드 구현, 사운드 추가(intro 및 outro, eating, success, failed sound 등), 까치 날갯짓 사운드 녹음(flying), 팀 전체 장면 피드백 및 인터랙션 기획",
             60,
             a + 7040,
             width - 150,
@@ -349,12 +367,13 @@ class Charac {
     vx = -5;
     vy;
     x;
-    y;
+    y=0;
     sy;
     sizex;
     sizey;
+    imgname;
     constructor(name, b, c) {
-        this.img = loadImage(name);
+        this.imgname=name;
         this.x = random(200, 500);
         this.vx = random(1, 5);
         this.sy = random(-10, -4);
@@ -362,6 +381,7 @@ class Charac {
         this.sizex = b;
         this.sizey = c;
     }
+    setup(){this.img = loadImage(this.imgname);}
     drawing() {
         push();
         imageMode(CENTER);

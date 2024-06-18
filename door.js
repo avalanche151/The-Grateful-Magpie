@@ -1,25 +1,26 @@
 
     class Door {
         backgroundImg;
-        doorImg = loadImage("한옥문.png");
+        doorImg;
         doorX; // The x-coordinate of the door image
         doorY; // The y-coordinate of the door image
         doorScale = 1; // Scale factor for the door image (e.g., 0.5 for half size)
         doorYOffset = 75; // Offset for the y-coordinate of the door image
         dragging = false;
-        doorWidth = doorImg.width * doorScale;
-        doorHeight = doorImg.height * doorScale;
+        doorWidth;
+        doorHeight;
         drg;
         temp1 = true;
-        constructor(p) {
-            this.backgroundImg = loadImage("한옥내부에서본까치.png");
-            this.doorX = (width - this.doorWidth) / 2 - 125; // Start at the center of the canvas
-            this.doorY = (height - this.doorHeight) / 2 - 60 + this.doorYOffset; // Apply the y-offset
-            this.drg = loadSound("drg.mp3");
+        preload(){
+            this.drg = loadSound("./data/drg");
         }
         setup() {
-            this.doorX = (width - this.doorWidth) / 2 - 125; // Start at the center of the canvas
-            this.doorY = (height - this.doorHeight) / 2 - 60 + this.doorYOffset; // Apply the y-offset
+            this.doorImg = loadImage("./data/한옥문.png");
+            this.doorWidth = this.doorImg.width * this.doorScale;
+            this.doorHeight = this.doorImg.height * this.doorScale;
+            this.doorX = (width - this.doorWidth) / 2 -275; // Start at the center of the canvas
+            this.doorY = (height - this.doorHeight) / 2 -325+ this.doorYOffset; // Apply the y-offset
+            this.backgroundImg = loadImage("./data/한옥내부에서본까치.png");
         }
         update() {
             this.mainDraw();
@@ -33,22 +34,25 @@
             fill(0, 50);
             quad(350, 250, 350, 480, 600, 480, 600, 250);
             pop();
+            push();
+            imageMode(CORNER);
             image(
                 this.doorImg,
                 this.doorX,
                 this.doorY,
-                this.doorWidth,
-                this.doorHeight
+                doorWidth,
+                doorHeight
             ); // Draw the scaled door image
+            pop();
         } //  end of mainDraw()
         mousePressed() {
             let doorWidth = this.doorImg.width * this.doorScale;
             let doorHeight = this.doorImg.height * this.doorScale; // Check if the mouse is over the door image
             if (
                 mouseX >= this.doorX &&
-                mouseX <= this.doorX + this.doorWidth &&
+                mouseX <= this.doorX + doorWidth &&
                 mouseY >= this.doorY &&
-                mouseY <= this.doorY + this.doorHeight
+                mouseY <= this.doorY + doorHeight
             ) {
                 this.dragging = true;
             } else if (
@@ -70,12 +74,11 @@
         mouseDragged() {
             if (this.dragging) {
                 if (this.temp1) {
-                    this.drg.cue(0);
                     this.drg.loop();
                     this.temp1 = false;
                 }
                 let doorWidth = this.doorImg.width * this.doorScale;
-                this.doorX = mouseX - this.doorWidth / 2; // Update doorX to follow the mouse's x-coordinate
+                this.doorX = mouseX - doorWidth / 2; // Update doorX to follow the mouse's x-coordinate
                 this.doorX = constrain(this.doorX, 322, 575); // Keep the door within the canvas bounds
             }
         } // end of mouseDragged()

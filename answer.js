@@ -7,7 +7,7 @@
       img_correct; // 맞음
       img_false; // 틀림
       //  SoundFile sad; // 낙제했을 때 사운드
-      font = loadFont("H2sa1M-100.vlw");
+      font = loadFont("./data/NanumGothic.ttf");
       cols = 5; // 열의 수
       rows = 3; // 행의 수
       diameter = 35; // 원의 지름
@@ -27,7 +27,6 @@
       check = 0; // 푼 문제 갯수
       checkTime = 0;
       currentScene = "start"; // 현재 화면을 추적하는 변수 추가 (기본값은 'test')
-      interval = 650; // text 깜빡이는 속도 조절 변수
       startDelayPassed = false; // 시작 지연이 지났는지 확인하는 변수
       startDelay = 0; // 시작 지연 시간 (3초)
       // 정답: (0,1), (1,2), X
@@ -36,27 +35,27 @@
       correct;
       wrong;
       temp1 = true;
-      constructor(p) {
-          this.successSound = loadSound("assets/successSound.mp3");
-          this.failedsound = loadSound("assets/failedsound.mp3");
-          this.correct = loadSound("assets/correct.mp3");
-          this.wrong = loadSound("assets/wrong.mp3");
-          this.selected = Array.from(new Array(rows), () => new Array(cols)); // 선택 상태를 저장할 배열 초기화
+      preload() {
+        this.successSound = loadSound("./data/successSound");
+        this.failedsound = loadSound("./data/failedsound");
+        this.correct = loadSound("./data/correct");
+        this.wrong = loadSound("./data/wrong");
+      } // end of Answer()'
+      setup() {
+          this.selected = Array.from(new Array(this.rows), () => new Array(this.cols)); // 선택 상태를 저장할 배열 초기화
           for (let i = 0; i < this.rows; i++) {
               for (let j = 0; j < this.cols; j++) {
                   this.selected[i][j] = 0; // 모든 원을 선택되지 않은 상태로 초기화
               }
           }
-          this.img_test = loadImage("assets/DifficultQuestion.png");
-          this.img_happySunbi = loadImage("assets/bg1.png");
-          this.img_sadSunbi = loadImage("assets/failseonbi.png");
-          this.img_testbackground = loadImage("assets/빈티지배경.jpg");
-          this.img_correct = loadImage("assets/맞음.png");
-          this.img_false = loadImage("assets/틀림.png");
-          this.s35 = loadSound("assets/s35.mp3"); //sad = new SoundFile(this, "실패소리.mp3");
+          this.img_test = loadImage("./data/DifficultQuestion.png");
+          this.img_happySunbi = loadImage("./data/bg1.png");
+          this.img_sadSunbi = loadImage("./data/failseonbi.png");
+          this.img_testbackground = loadImage("./data/빈티지배경.jpg");
+          this.img_correct = loadImage("./data/맞음.png");
+          this.img_false = loadImage("./data/틀림.png");
+          this.s35 = loadSound("./data/s35"); //sad = new SoundFile(this, "실패소리");
           this.startTime = millis();
-      } // end of Answer()'
-      setup() {
           this.currentScene = "start";
           this.correctAnswers = 0;
           this.check = 0;
@@ -68,13 +67,13 @@
           }
       }
       update() {
-          if (this.currentScene.equals("start")) {
+          if (this.currentScene=="start") {
               //drawingStartScene();
               if (millis() - this.startTime > this.startDelay) {
                   this.currentScene = "test";
                   this.startTime = millis();
               }
-          } else if (this.currentScene.equals("test")) {
+          } else if (this.currentScene=="test") {
               this.drawing();
               if (millis() - this.startTime > this.timeLimit) {
                   this.checkAnswers();
@@ -101,7 +100,7 @@
       //  }
       //}  // end of drawingStartScene()
       drawing() {
-          if (!this.currentScene.equals("test")) {
+          if (this.currentScene!="test") {
               return;
           }
           push();
@@ -111,11 +110,11 @@
           pop(); // 시간 제한까지 남은 시간 계산
           let remainingTime =
               (this.timeLimit - (millis() - this.startTime)) / 1000; // 초 단위로 변환
-          let timeText = "Left Time: " + remainingTime + "s"; // 남은 시간 표시
+          let timeText = "Left Time: " + floor(remainingTime) + "s"; // 남은 시간 표시
           push();
           textSize(20);
           fill(0);
-          textAlign(RIGHT_ARROW, TOP);
+          textAlign(RIGHT, TOP);
           text(timeText, width - 20, 20); // 화면 오른쪽 상단에 위치
           pop();
           this.correctAnswers = 0; // 매 프레임마다 정답 개수를 0으로 초기화
@@ -230,16 +229,14 @@
           fill(255);
           textAlign(CENTER, CENTER);
           pop();
-          if (sceneName.equals("fail")) {
+          if (sceneName=="fail") {
               push();
               image(this.img_sadSunbi, 0, 0, width, height);
               fill(250);
               textSize(60);
               textAlign(CENTER);
               if (sstart) {
-                  this.failedsound.cue(0);
                   this.failedsound.play();
-                  this.s35.cue(0);
                   this.s35.play();
                   sstart = false;
               }
@@ -249,9 +246,8 @@
                   height / 2 - 290
               );
               pop(); //sad.play();
-          } else if (sceneName.equals("success")) {
+          } else if (sceneName=="success") {
               if (sstart) {
-                  this.successSound.cue(0);
                   this.successSound.play();
                   sstart = false;
               }
@@ -267,7 +263,7 @@
               );
               imageMode(CENTER);
               pop();
-              if ((millis() / this.interval) % 2 == 0) {
+              
                   push();
                   textSize(30);
                   fill("#0F24FC");
@@ -278,7 +274,6 @@
                       height / 2 - 285
                   ); // 재시도 옵션
                   pop();
-              }
           } // 여기서 원하는 장면 전환 로직을 추가할 수 있습니다.
       } // end of sceneTransition()
       resetTest() {
@@ -296,12 +291,12 @@
       } // end of resetTest()
       keyPressed() {
           // 'success' 화면에서 'r' 키를 눌렀을 때 테스트 재시작
-          if (this.currentScene.equals("success") && key == "r") {
+          if (this.currentScene=="success" && key == "r") {
               this.successSound.stop();
               sstart = true;
               this.successSound.stop();
               this.resetTest(); // 게임을 초기화하고 다시 시작
-          } else if (this.currentScene.equals("fail") && key == " ") {
+          } else if (this.currentScene=="fail"&& key == " ") {
               this.failedsound.stop();
               this.s35.stop();
               sstart = true;

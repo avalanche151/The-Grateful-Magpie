@@ -11,20 +11,22 @@ class Afeasy {
     scn_idx = 0;
     s328;
     s329;
-    constructor(p) {
-        this.seonbi_thanks_kkachi = loadImage("assets/seonbi_thanks_kkachi.png");
+    preload(){
+        this.s328 = loadSound("./data/s328");
+        this.s329 = loadSound("./data/s329");
+        outro = loadSound("./data/outrosound");
+    }
+    setup(){
+        this.seonbi_thanks_kkachi = loadImage("./data/seonbi_thanks_kkachi.png");
         this.kkachi_with_jokbo_and_seonbi = loadImage(
-            "assets/kkachi_with_jokbo_and_seonbi.jpg"
+            "./data/kkachi_with_jokbo_and_seonbi.jpg"
         );
-        this.look_jokbo = loadImage("assets/look_jokbo.png");
-        this.fire_seonbi = loadImage("assets/fire_seonbi.png");
-        this.fire_seonbi2 = loadImage("assets/fire_seonbi2.png");
-        this.studying_hard_seonbi = loadImage("assets/studying_hard_seonbi.png");
-        this.test_seonbi = loadImage("assets/과거시험보는선비.jpg");
-        this.finale = loadImage("assets/finale.png");
-        this.s328 = loadSound("assets/s328.mp3");
-        this.s329 = loadSound("assets/s329.mp3");
-        outro = loadSound("assets/outrosound.mp3");
+        this.look_jokbo = loadImage("./data/look_jokbo.png");
+        this.fire_seonbi = loadImage("./data/fire_seonbi.png");
+        this.fire_seonbi2 = loadImage("./data/fire_seonbi2.png");
+        this.studying_hard_seonbi = loadImage("./data/studying_hard_seonbi.png");
+        this.test_seonbi = loadImage("./data/과거시험보는선비.jpg");
+        this.finale = loadImage("./data/finale.png");
     }
     update() {
         this.drawing();
@@ -35,7 +37,6 @@ class Afeasy {
                 push();
                 if (sstart) {
                     //audio set
-                    this.s328.cue(0);
                     this.s328.play();
                     sstart = false;
                 }
@@ -54,7 +55,6 @@ class Afeasy {
                 if (sstart) {
                     //audio set
                     this.s328.stop();
-                    this.s329.cue(0);
                     this.s329.play();
                     sstart = false;
                 }
@@ -70,18 +70,17 @@ class Afeasy {
                 if (sstart) {
                     //audio set
                     this.s329.stop();
-                    outro.cue(0);
                     outro.loop();
                     sstart = false;
                 }
                 image(this.finale, 0, -400);
                 push();
-                textSize(150);
+                textSize(100);
                 fill(0, 95);
                 rect(48, 655, 410, 120);
                 fill(250);
                 console.log(mouseX, mouseY);
-                text("The End.", 50, 800);
+                text("The End.", 50, 750);
                 pop();
                 break;
             case 3 /*push();

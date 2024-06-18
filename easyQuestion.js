@@ -57,8 +57,8 @@ class EasyQuestion {
     EQ_J2 = loadImage("EQ_J2.png");
     EQ_J3 = loadImage("EQ_J3.png");
 
-    //sad = new SoundFile(this, "sad.mp3");
-    //happy = new SoundFile(this, "happy.mp3");
+    //sad = new SoundFile(this, "sad");
+    //happy = new SoundFile(this, "happy");
     startTime = millis();
   }
 
@@ -228,7 +228,7 @@ class EasyQuestion {
     fill(255);
     textAlign(CENTER, CENTER);
     pop();
-    if (sceneName.equals("fail")) {
+    if (sceneName=="fail") {
       image(img_sadSunbi, 0, 0, width, height);
       fill(250);
       textSize(50);
@@ -241,7 +241,7 @@ class EasyQuestion {
         text("Press 'r' to take the test again", width/2-190, height/2 - 300);
         pop();
       }
-    } else if (sceneName.equals("success")) {
+    } else if (sceneName=="success") {
       push();
       image(img_background, 0, 0, width, height);
       fill(0);
@@ -269,10 +269,10 @@ class EasyQuestion {
 
   void keyPressed() {
     // 'success' 화면에서 'r' 키를 눌렀을 때 테스트 재시작
-    if (currentScene.equals("success") && key == ' ') {
+    if (currentScene=="success" && key == ' ') {
       //resetTest();
       main_scene_code = "aeasy";// 게임을 초기화하고 다시 시작
-    } else if (currentScene.equals("fail") && key == 'r') {
+    } else if (currentScene=="fail" && key == 'r') {
       resetTest();
       Num_Jokbo = 3;
       main_scene_code = "howsp";
@@ -340,32 +340,34 @@ class EasyQuestion {
         failedsound;
         correct;
         wrong;
-        constructor(p) {
-            this.s327 = loadSound("s327.mp3");
-            this.successSound = loadSound("successSound.mp3");
-            this.failedsound = loadSound("failedsound.mp3");
-            this.correct = loadSound("correct.mp3");
-            this.wrong = loadSound("wrong.mp3");
-            this.selected = Array.from(new Array(rows), () => new Array(cols));
+        preload() {
+          this.s327 = loadSound("./data/s327");
+          this.successSound = loadSound("./data/successSound");
+          this.failedsound = loadSound("./data/failedsound");
+          this.correct = loadSound("./data/correct");
+          this.wrong = loadSound("./data/wrong");
+            
+        }
+        setup() {
+          this.selected = Array.from(new Array(this.rows), () => new Array(this.cols));
             for (let i = 0; i < this.rows; i++) {
                 for (let j = 0; j < this.cols; j++) {
                     this.selected[i][j] = 0;
                 }
             }
-            this.img_test = loadImage("test11.png");
-            this.img_sunbi = loadImage("happysunbi.png");
-            this.img_background = loadImage("bg1.png");
-            this.img_sadSunbi = loadImage("failseonbi.png");
-            this.img_testbackground = loadImage("bg2.jpg");
-            this.EQ_J1 = loadImage("EQ_j1.png");
-            this.EQ_J2 = loadImage("EQ_J2.png");
-            this.EQ_J3 = loadImage("EQ_J3.png");
-            this.img_correct = loadImage("맞음.png");
-            this.img_false = loadImage("틀림.png"); //sad = new SoundFile(this, "sad.mp3");
-            //happy = new SoundFile(this, "happy.mp3");
+             //sad = new SoundFile(this, "sad");
+            //happy = new SoundFile(this, "happy");
             startTime = millis();
-        }
-        setup() {
+          this.img_test = loadImage("./data/test11.png");
+            this.img_sunbi = loadImage("./data/happysunbi.png");
+            this.img_background = loadImage("./data/bg1.png");
+            this.img_sadSunbi = loadImage("./data/failseonbi.png");
+            this.img_testbackground = loadImage("./data/bg2.jpg");
+            this.EQ_J1 = loadImage("./data/EQ_j1.png");
+            this.EQ_J2 = loadImage("./data/EQ_J2.png");
+            this.EQ_J3 = loadImage("./data/EQ_J3.png");
+            this.img_correct = loadImage("./data/맞음.png");
+            this.img_false = loadImage("./data/틀림.png");
             this.currentScene = "start";
             this.correctAnswers = 0;
             this.check = 0;
@@ -377,13 +379,13 @@ class EasyQuestion {
             }
         }
         update() {
-            if (this.currentScene.equals("start")) {
+            if (this.currentScene=="start") {
                 //drawingStartScene();
                 if (millis() - startTime > this.startDelay) {
                     this.currentScene = "test";
                     startTime = millis();
                 }
-            } else if (this.currentScene.equals("test")) {
+            } else if (this.currentScene=="test") {
                 this.drawing();
                 if (millis() - startTime > this.timeLimit) {
                     this.checkAnswers();
@@ -425,12 +427,12 @@ class EasyQuestion {
             //text_();
             //pop();
             let remainingTime =
-                (this.timeLimit - (millis() - startTime)) / 1000;
+                floor((this.timeLimit - (millis() - startTime)) / 1000);
             let timeText = "Left Time: " + remainingTime + "s";
             push();
             textSize(20);
             fill(0);
-            textAlign(RIGHT_ARROW, TOP);
+            textAlign(RIGHT, TOP);
             text(timeText, width - 20, 20);
             pop();
             this.correctAnswers = 0;
@@ -552,11 +554,10 @@ class EasyQuestion {
             fill(255);
             textAlign(CENTER, CENTER);
             pop();
-            if (sceneName.equals("fail")) {
+            if (sceneName=="fail") {
                 if (sstart) {
-                    this.failedsound.cue(0);
                     this.failedsound.play();
-                    this.temp1 = false;
+                    sstart = false;
                 }
                 push();
                 image(this.img_sadSunbi, 0, 0, width, height);
@@ -569,7 +570,7 @@ class EasyQuestion {
                     height / 2 - 290
                 );
                 pop(); //sad.play();
-                if ((millis() / this.interval) % 2 == 0) {
+                {
                     push();
                     textSize(30);
                     fill(250);
@@ -581,12 +582,10 @@ class EasyQuestion {
                     );
                     pop();
                 }
-            } else if (sceneName.equals("success")) {
+            } else if (sceneName=="success") {
                 push();
                 if (sstart) {
-                    this.successSound.cue(0);
                     this.successSound.play();
-                    this.s327.cue(0);
                     this.s327.play();
                     sstart = false;
                 }
@@ -616,13 +615,13 @@ class EasyQuestion {
         } // end of resetTest()
         keyPressed() {
             // 'success' 화면에서 'r' 키를 눌렀을 때 테스트 재시작
-            if (this.currentScene.equals("success") && key == " ") {
+            if (this.currentScene=="success" && key == " ") {
                 //resetTest();
                 this.successSound.stop();
                 this.s327.stop();
                 sstart = true;
                 main_scene_code = "aeasy"; // 게임을 초기화하고 다시 시작
-            } else if (this.currentScene.equals("fail") && key == "r") {
+            } else if (this.currentScene=="fail" && key == "r") {
                 this.failedsound.stop();
                 sstart = true;
                 this.resetTest();

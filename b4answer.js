@@ -5,13 +5,13 @@
         scn_idx = 0; //int txt_idx = 0;
         s33;
         s34;
-        constructor(p) {
-            this.tired_seonbi = loadImage("tired_seonbi.png");
-            this.aaa_seonbi = loadImage("과거시험보는선비.jpg");
-            this.s33 = loadSound("s33.mp3");
-            this.s34 = loadSound("s34.mp3");
+        preload(){
+            this.s33 = loadSound("./data/s33");
+            this.s34 = loadSound("./data/s34");
         }
         setup() {
+            this.tired_seonbi = loadImage("./data/tired_seonbi.png");
+            this.aaa_seonbi = loadImage("./data/과거시험보는선비.jpg");
             this.scn_idx = 0;
         }
         update() {
@@ -23,7 +23,6 @@
                     push();
                     if (sstart) {
                         //audio set
-                        this.s33.cue(0);
                         this.s33.play();
                         sstart = false;
                     }
@@ -43,7 +42,6 @@
                     if (sstart) {
                         //audio set
                         this.s33.stop();
-                        this.s34.cue(0);
                         this.s34.play();
                         sstart = false;
                     }
